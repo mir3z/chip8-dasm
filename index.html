@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Chip-8 Disassembler</title>
+    <script src="libs/require.js"></script>
+</head>
+<body>
+    <h1>Chip-8 Disassembler</h1>
+    <canvas id="screen"></canvas>
+
+    <script>
+        require.config({
+            paths: {
+                "chip8": "chip8-emu/build/chip8.min",
+                "chip8dasm": "build/chip8-dasm.min"
+            }
+        });
+
+        require(['chip8', 'chip8dasm'], function (chip8, Chip8Dasm) {
+            var rom = 'chip8-emu/roms/Kaleidoscope [Joseph Weisbecker, 1978].ch8';
+
+            chip8.initialize({
+                ctx: document.getElementById('screen').getContext('2d')
+            });
+
+            chip8.loadROM(rom, function () {
+                console.log('ROM loaded:', rom);
+
+                var dasm = new Chip8Dasm(chip8);
+                console.time('dissassemble');
+                var result = dasm.disassemble(0x0200);
+                console.timeEnd('dissassemble');
+                console.warn(result);
+            });
+        });
+    </script>
+</body>
+</html>

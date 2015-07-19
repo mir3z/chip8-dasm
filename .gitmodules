@@ -1,0 +1,3 @@
+[submodule "chip8-emu"]
+	path = chip8-emu
+	url = https://github.com/mir3z/chip8-emu.git
