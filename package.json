@@ -12,6 +12,10 @@
     "grunt-jsdoc": "^0.5.7",
     "grunt-umd": "^2.3.3"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mir3z/chip8-dasm.git"
+  },
   "author": "mirz <mirz.hq@gmail.com>",
   "license": "MIT"
 }
