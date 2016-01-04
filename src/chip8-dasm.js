@@ -15,7 +15,7 @@ var Chip8Dasm;
     /**
      * Disassembles machine code stored in chip8 memory starting at address given in offset param.
      * @param {number} offset - starting offset
-     * @returns {Object[]} Array of decoded instructions
+     * @returns {Object[]} Array of decoded instructions and their address
      * @memberof Chip8Dasm
      */
     Chip8Dasm.prototype.disassemble = function (offset) {
@@ -27,9 +27,10 @@ var Chip8Dasm;
         }
 
         for (var i = 0 + (offset || 0), memlen = mem.length; i < memlen; i += 2) {
-            result.push(
-                this.decode(mem[i] << 8 | mem[i + 1])
-            );
+            result.push({
+                addr: i,
+                instr: this.decode(mem[i] << 8 | mem[i + 1])
+            });
         }
 
         return result;
