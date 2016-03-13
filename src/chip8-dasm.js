@@ -27,9 +27,12 @@ var Chip8Dasm;
         }
 
         for (var i = 0 + (offset || 0), memlen = mem.length; i < memlen; i += 2) {
+            var opcode = mem[i] << 8 | mem[i + 1];
+
             result.push({
                 addr: i,
-                instr: this.decode(mem[i] << 8 | mem[i + 1])
+                opcode: opcode,
+                instr: this.decode(opcode)
             });
         }
 
